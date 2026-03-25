@@ -1,334 +1,517 @@
-import { useRef, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { StarsBackground } from '@/components/animate-ui/backgrounds/stars';
 
+function TopNav() {
+  return (
+    <nav style={{
+      position: 'fixed',
+      top: 14,
+      left: 0,
+      right: 0,
+      zIndex: 40,
+      display: 'flex',
+      justifyContent: 'center',
+      pointerEvents: 'none'
+    }}>
+      <div style={{
+        pointerEvents: 'auto',
+        position: 'relative',
+        width: 'min(1100px, 92vw)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '62px'
+      }}>
+        <div style={{
+          position: 'relative',
+          display: 'flex',
+          gap: '14px',
+          padding: '8px 12px',
+          background: 'transparent'
+        }}>
+          <a href="#hero" style={{
+            fontFamily: '"Courier New", monospace',
+            fontSize: '0.92rem',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.9)',
+            textDecoration: 'none',
+            padding: '8px 16px',
+            border: '1px solid rgba(255,255,255,0.45)',
+            borderRadius: '999px',
+            background: 'transparent'
+          }}>Hero</a>
+          <a href="#projects" style={{
+            fontFamily: '"Courier New", monospace',
+            fontSize: '0.92rem',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.82)',
+            textDecoration: 'none',
+            padding: '8px 16px',
+            border: '1px solid rgba(255,255,255,0.35)',
+            borderRadius: '999px',
+            background: 'transparent'
+          }}>Projects</a>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+// Video Background 
 function VideoBackground() {
   const videoRef = useRef(null);
-
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.play().catch(err => console.log('Autoplay failed:', err));
-    }
+    const v = videoRef.current;
+    if (v) { v.muted = true; v.play().catch(() => {}); }
   }, []);
-
   return (
-    <video
-      ref={videoRef}
-      autoPlay
-      loop
-      muted
-      playsInline
-      src="/solarsys.mp4"
+    <video ref={videoRef} autoPlay loop muted playsInline src="/solarsys.mp4"
       style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        minWidth: '100%',
-        minHeight: '100%',
-        width: 'auto',
-        height: 'auto',
-        objectFit: 'cover',
-        zIndex: 0
+        position: 'absolute', top: '50%', left: '50%',
+        transform: 'translate(-50%,-50%)',
+        minWidth: '100%', minHeight: '100%',
+        width: 'auto', height: 'auto',
+        objectFit: 'cover', zIndex: 0
       }}
     />
   );
 }
 
-function Navbar() {
-  const location = useLocation();
-  
+// Hero Slide
+function HeroSlide() {
   return (
-    <nav style={{
-      position: 'fixed',
-      bottom: '40px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      zIndex: 1000,
-      display: 'flex',
-      gap: '40px',
-      padding: '15px 40px',
-      background: 'rgba(0, 0, 0, 0.3)',
-      backdropFilter: 'blur(10px)',
-      borderRadius: '50px',
-      border: '1px solid rgba(255, 255, 255, 0.1)'
+    <div style={{
+      height: '100%', display: 'flex', alignItems: 'center',
+      justifyContent: 'center', flexDirection: 'column',
+      textAlign: 'center', padding: '0 24px', color: 'white'
     }}>
-      <Link 
-        to="/bio" 
-        style={{
-          color: location.pathname === '/bio' ? '#fff' : 'rgba(255, 255, 255, 0.6)',
-          textDecoration: 'none',
-          fontSize: '16px',
-          fontWeight: location.pathname === '/bio' ? '600' : '400',
-          transition: 'all 0.3s ease'
-        }}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -28 }}
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
       >
-        Bio
-      </Link>
-      <Link 
-        to="/" 
-        style={{
-          color: location.pathname === '/' ? '#fff' : 'rgba(255, 255, 255, 0.6)',
-          textDecoration: 'none',
-          fontSize: '16px',
-          fontWeight: location.pathname === '/' ? '600' : '400',
-          transition: 'all 0.3s ease'
-        }}
-      >
-        Hero
-      </Link>
-      <Link 
-        to="/projects" 
-        style={{
-          color: location.pathname === '/projects' ? '#fff' : 'rgba(255, 255, 255, 0.6)',
-          textDecoration: 'none',
-          fontSize: '16px',
-          fontWeight: location.pathname === '/projects' ? '600' : '400',
-          transition: 'all 0.3s ease'
-        }}
-      >
-        Projects
-      </Link>
-    </nav>
-  );
-}
-
-function Hero() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 0.8, ease: 'easeInOut' }}
-      style={{
-        position: 'relative',
-        zIndex: 10,
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'white',
-        textAlign: 'center',
-        padding: '0 20px'
-      }}
-    >
-      <h1 style={{
-        fontSize: '4rem',
-        lineHeight: '1.4',
-        maxWidth: '900px',
-        textShadow: '0 2px 20px rgba(0,0,0,0.5)',
-        fontFamily: 'Georgia, "Times New Roman", serif'
-      }}>
-        If the sky is the limit,<br />I'll refactor gravity.
-      </h1>
-      
-    </motion.div>
-  );
-}
-
-function Bio() {
-    const skills = [
-    'C', 'C++', 'Java', 'Python', 'Go',
-    'HTML5', 'CSS3', 'JavaScript',
-    'MySQL', 'PostgreSQL', 'Firebase', 'Supabase',
-    'React', 'NextJS', 'Tailwind CSS', 'Django',
-    'Figma', 'Android Studio'
-  ];
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 100 }}
-      transition={{ duration: 0.8, ease: 'easeInOut' }}
-      style={{
-        position: 'relative',
-        zIndex: 10,
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        color: 'white',
-        padding: '0 100px',
-        maxWidth: '900px',
-        fontFamily: 'system-ui, -apple-system, "Segoe UI", sans-serif'
-      }}
-    >
-      <h1 style={{ 
-        fontSize: '3.5rem', 
-        marginBottom: '20px', 
-        fontWeight: '500',
-        letterSpacing: '-0.02em'
-      }}>
-        Hello, I'm Edrill Falziz Bilan
-      </h1>
-      <p style={{ 
-        fontSize: '1.4rem', 
-        marginBottom: '50px', 
-        lineHeight: '1.8', 
-        opacity: 0.9,
-        fontWeight: '400'
-      }}>
-        An aspiring Software Engineer, studying Computer Science at Pamantasan ng Lungsod ng Maynila (PLM)
-      </p>
-    
-      <h2 style={{ fontSize: '1.8rem', marginBottom: '20px', fontWeight: '600' }}>Skills</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px' }}>
-        {skills.map(skill => (
-          <div key={skill} style={{
-            padding: '10px 20px',
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '25px',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
-          }}>
-            {skill}
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-function Projects() {
-  const projects = [
-    {
-      id: 1,
-      title: 'Bilandog E-Commerce System',
-      desc: 'A full-stack project that I developed for a fictional e-commerce business to practice React and Django framework.',
-      link: 'https://github.com/PyroJayxX/Bilandog-Ecommerce-V2'
-    },
-    {
-      id: 2,
-      title: 'Fantasy Flip: Android Card Game',
-      desc: 'Lead developer for a full-stack android mobile game utilizing Android Studio and Firebase.',
-      link: 'https://github.com/PyroJayxX/MobileGame-AppDev-Project'
-    },
-    {
-      id: 3,
-      title: 'AI-Powered Pulmonary Nodule Detection',
-      desc: 'Trained a deep learning model that detects pulmonary nodules from input x-ray image for early detection of lung cancer.',
-      link: 'https://github.com/PyroJayxX/Thoracic-Disease-Classifier-ResNet50'
-    },
-    {
-      id: 4,
-      title: 'Irregular Enrollment System',
-      desc: 'Front-end developer and designer for school project PLM Irregular Enrollment System utilizing JavaFX and Figma.',
-      link: 'https://github.com/chaotic-braindead/Enrollment'
-    },
-    {
-      id: 5,
-      title: 'DOM Programming Language',
-      desc: 'Lead developer for the DOM programming language, a customized web-based interpreter language.',
-      link: 'https://github.com/IEMDomain04/DOM-IDE'
-    },
-    {
-      id: 6,
-      title: 'BlitzBall Game x86 Assembly',
-      desc: 'Co-developer for dodgeball-inspired videogame built using x86 assembly language and DOSbox emulator.',
-      link: 'https://github.com/sonajX/DodgeBall-ASM-Game'
-    },
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.8, ease: 'easeInOut' }}
-      style={{
-        position: 'relative',
-        zIndex: 10,
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        padding: '0 80px',
-        overflow: 'auto'
-      }}
-    >
-      <h1 style={{ fontSize: '3.5rem', marginBottom: '40px', fontWeight: '700' }}>
-        Projects
-      </h1>
-      
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: '25px',
-        maxWidth: '1100px',
-        paddingBottom: '100px'
-      }}>
-        {projects.map(project => (
-          <a 
-            key={project.id}
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              padding: '30px',
-              background: 'rgba(255, 255, 255, 0.08)',
-              backdropFilter: 'blur(10px)',
-              borderRadius: '15px',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer',
-              textDecoration: 'none',
-              color: 'white'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(120, 199, 255, 0.15)';
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.borderColor = 'rgba(120, 199, 255, 0.3)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-            }}>
-            <h3 style={{ fontSize: '1.4rem', marginBottom: '10px', fontWeight: '600' }}>{project.title}</h3>
-            <p style={{ opacity: 0.85, fontSize: '0.95rem', lineHeight: '1.6' }}>{project.desc}</p>
-          </a>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-function AppContent() {
-  const location = useLocation();
-
-  return (
-    <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0, overflow: 'hidden', backgroundColor: 'black' }}>
-      <VideoBackground />
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0, 0, 0, 0.3)',
-        zIndex: 5
-      }} />
-      
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Hero />} />
-          <Route path="/bio" element={<Bio />} />
-          <Route path="/projects" element={<Projects />} />
-        </Routes>
-      </AnimatePresence>
-      
-      <Navbar />
+        <p style={{
+          fontFamily: '"Courier New", monospace', fontSize: '0.78rem',
+          letterSpacing: '0.28em', opacity: 0.5, marginBottom: '26px',
+          textTransform: 'uppercase'
+        }}>Software Engineer · Computer Science</p>
+        <h1 style={{
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontSize: 'clamp(2.2rem, 5vw, 4rem)',
+          lineHeight: 1.38, maxWidth: '820px',
+          textShadow: '0 2px 40px rgba(0,0,0,0.7)',
+          fontWeight: 400, margin: 0
+        }}>
+          If the sky is the limit,<br />
+          <em style={{ opacity: 0.82 }}>I'll refactor gravity.</em>
+        </h1>
+      </motion.div>
     </div>
   );
 }
 
-function App() {
+// Bio Slide
+function BioSlide() {
+  const skills = [
+    'C','C++','Java','Python','Go',
+    'HTML5','CSS3','JavaScript',
+    'MySQL','PostgreSQL','Firebase','Supabase',
+    'React','Next.js','Tailwind CSS','Django',
+    'Figma','Android Studio'
+  ];
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <div style={{
+      height: '100%', display: 'flex', alignItems: 'center',
+      justifyContent: 'center', padding: '0 clamp(30px, 8vw, 110px)', color: 'white'
+    }}>
+      <motion.div
+        initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -28 }}
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        style={{ maxWidth: '860px', width: '100%' }}
+      >
+        <p style={{
+          fontFamily: '"Courier New", monospace', fontSize: '0.75rem',
+          letterSpacing: '0.26em', opacity: 0.45,
+          marginBottom: '16px', textTransform: 'uppercase'
+        }}>About me</p>
+        <h2 style={{
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+          fontWeight: 400, marginBottom: '16px', lineHeight: 1.3
+        }}>
+          Hello, I'm <em>Edrill Falziz Bilan</em>
+        </h2>
+        <p style={{
+          fontFamily: '"Courier New", monospace',
+          fontSize: 'clamp(0.8rem, 1.15vw, 0.95rem)',
+          opacity: 0.7, lineHeight: 1.95, marginBottom: '36px', maxWidth: '580px'
+        }}>
+          An aspiring Software Engineer studying Computer Science at
+          Pamantasan ng Lungsod ng Maynila (PLM). I build things that
+          sit at the intersection of logic and craft.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '9px' }}>
+          {skills.map(s => (
+            <span key={s} style={{
+              fontFamily: '"Courier New", monospace',
+              fontSize: '0.72rem', letterSpacing: '0.08em',
+              padding: '6px 14px',
+              background: 'rgba(255,255,255,0.07)',
+              border: '1px solid rgba(255,255,255,0.16)',
+              borderRadius: '3px', color: 'rgba(255,255,255,0.8)'
+            }}>{s}</span>
+          ))}
+        </div>
+      </motion.div>
+    </div>
   );
 }
 
-export default App;
+// Carousel
+const SLIDE_DURATION = 5500;
+
+function Carousel() {
+  const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = useRef(null);
+  const rafRef = useRef(null);
+  const startRef = useRef(performance.now());
+
+  const startTimer = useCallback(() => {
+    clearInterval(timerRef.current);
+    cancelAnimationFrame(rafRef.current);
+    startRef.current = performance.now();
+    setProgress(0);
+
+    const tick = (now) => {
+      const p = Math.min((now - startRef.current) / SLIDE_DURATION, 1);
+      setProgress(p);
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+
+    timerRef.current = setInterval(() => {
+      setActive(prev => {
+        startRef.current = performance.now();
+        setProgress(0);
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(tick);
+        return (prev + 1) % 2;
+      });
+    }, SLIDE_DURATION);
+  }, []);
+
+  useEffect(() => {
+    startTimer();
+    return () => { clearInterval(timerRef.current); cancelAnimationFrame(rafRef.current); };
+  }, [startTimer]);
+
+  const goTo = (i) => { setActive(i); startTimer(); };
+
+  return (
+    <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+      <AnimatePresence mode="wait">
+        {active === 0 ? <HeroSlide key="hero" /> : <BioSlide key="bio" />}
+      </AnimatePresence>
+
+      {/* Dot indicators */}
+      <div style={{
+        position: 'absolute', bottom: '36px', left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex', gap: '12px', zIndex: 20, alignItems: 'center'
+      }}>
+        {[0, 1].map(i => (
+          <button key={i} onClick={() => goTo(i)} style={{
+            width: i === active ? '34px' : '8px', height: '8px',
+            borderRadius: '4px', border: 'none', cursor: 'pointer', padding: 0,
+            background: i === active ? 'white' : 'rgba(255,255,255,0.3)',
+            transition: 'all 0.4s cubic-bezier(0.22,1,0.36,1)',
+            position: 'relative', overflow: 'hidden'
+          }}>
+            {i === active && (
+              <span style={{
+                position: 'absolute', top: 0, left: 0, bottom: 0,
+                width: `${progress * 100}%`,
+                background: 'rgba(120,200,255,0.8)',
+                transition: 'width 0.05s linear'
+              }} />
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Scroll hint */}
+      <div style={{
+        position: 'absolute', bottom: '36px', right: '44px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        gap: '5px', zIndex: 20, opacity: 0.4, color: 'white',
+        fontFamily: '"Courier New", monospace',
+        fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase'
+      }}>
+        <span>Scroll</span>
+        <svg width="12" height="20" viewBox="0 0 12 20" fill="none">
+          <rect x="1" y="1" width="10" height="18" rx="5" stroke="white" strokeWidth="1.5"/>
+          <motion.rect x="5" y="4" width="2" height="4" rx="1" fill="white"
+            animate={{ y: [4, 9, 4] }}
+            transition={{ duration: 1.7, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// Projects
+const projects = [
+  {
+    id: 1, title: 'Bilandog E-Commerce System',
+    tag: 'Full-Stack · React · Django',
+    desc: 'A full-stack e-commerce platform built to practice React and Django, featuring product listings, cart, and order management.',
+    link: 'https://github.com/PyroJayxX/Bilandog-Ecommerce-V2'
+  },
+  {
+    id: 2, title: 'Fantasy Flip: Android Card Game',
+    tag: 'Mobile · Android Studio · Firebase',
+    desc: 'Lead developer on a full-stack Android card game with real-time multiplayer and Firebase backend.',
+    link: 'https://github.com/PyroJayxX/MobileGame-AppDev-Project'
+  },
+  {
+    id: 3, title: 'AI Pulmonary Nodule Detection',
+    tag: 'Deep Learning · ResNet50',
+    desc: 'Trained a ResNet-50 model to detect pulmonary nodules in chest X-rays for early lung cancer screening.',
+    link: 'https://github.com/PyroJayxX/Thoracic-Disease-Classifier-ResNet50'
+  },
+  {
+    id: 4, title: 'Irregular Enrollment System',
+    tag: 'Front-End · JavaFX · Figma',
+    desc: "Front-end developer and designer for PLM's irregular enrollment system, from wireframe to implementation.",
+    link: 'https://github.com/chaotic-braindead/Enrollment'
+  },
+  {
+    id: 5, title: 'DOM Programming Language',
+    tag: 'Language Design · Interpreter',
+    desc: 'Lead developer of DOM — a customized web-based interpreted programming language with its own IDE.',
+    link: 'https://github.com/IEMDomain04/DOM-IDE'
+  },
+  {
+    id: 6, title: 'BlitzBall — x86 Assembly',
+    tag: 'Game Dev · x86 ASM · DOSBox',
+    desc: 'Co-developer of a dodgeball-inspired game built entirely in x86 assembly running inside a DOSBox emulator.',
+    link: 'https://github.com/sonajX/DodgeBall-ASM-Game'
+  },
+];
+
+function ProjectCard({ project, index }) {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <motion.a
+      ref={ref} href={project.link} target="_blank" rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 36 }}
+      animate={visible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'block', textDecoration: 'none', color: 'inherit', padding: '30px',
+        background: hovered ? 'rgba(120,200,255,0.06)' : 'rgba(255,255,255,0.03)',
+        border: `1px solid ${hovered ? 'rgba(120,200,255,0.22)' : 'rgba(255,255,255,0.07)'}`,
+        borderRadius: '6px',
+        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
+        transition: 'all 0.32s cubic-bezier(0.22,1,0.36,1)', cursor: 'pointer'
+      }}
+    >
+      <div style={{
+        fontFamily: '"Courier New", monospace', fontSize: '0.65rem',
+        letterSpacing: '0.2em', textTransform: 'uppercase',
+        color: hovered ? 'rgba(120,200,255,0.85)' : 'rgba(255,255,255,0.3)',
+        marginBottom: '11px', transition: 'color 0.3s'
+      }}>{project.tag}</div>
+      <h3 style={{
+        fontFamily: 'Georgia, "Times New Roman", serif',
+        fontSize: '1.2rem', fontWeight: 400,
+        color: 'white', marginBottom: '11px', lineHeight: 1.3
+      }}>{project.title}</h3>
+      <p style={{
+        fontFamily: '"Courier New", monospace', fontSize: '0.8rem',
+        lineHeight: 1.85, color: 'rgba(255,255,255,0.48)'
+      }}>{project.desc}</p>
+      <div style={{
+        marginTop: '18px', fontFamily: '"Courier New", monospace',
+        fontSize: '0.68rem', letterSpacing: '0.14em', textTransform: 'uppercase',
+        color: hovered ? 'rgba(120,200,255,0.75)' : 'rgba(255,255,255,0.18)',
+        display: 'flex', alignItems: 'center', gap: '5px', transition: 'color 0.3s'
+      }}>
+        View on GitHub
+        <span style={{
+          display: 'inline-block',
+          transform: hovered ? 'translateX(4px)' : 'translateX(0)',
+          transition: 'transform 0.3s'
+        }}>→</span>
+      </div>
+    </motion.a>
+  );
+}
+
+function ProjectsSection() {
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true); }, { threshold: 0.06 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section id="projects" style={{ position: 'relative', background: '#000000', minHeight: '100vh', scrollMarginTop: '72px' }}>
+      {/* Stars fills the whole section */}
+      <StarsBackground
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+        factor={0.06}
+        speed={60}
+        starColor="#ffffff"
+      />
+      <div style={{
+        position: 'relative', zIndex: 1,
+        padding: 'clamp(80px, 10vh, 130px) clamp(24px, 8vw, 100px)',
+        maxWidth: '1100px', margin: '0 auto'
+      }}>
+        <motion.div ref={ref}
+          initial={{ opacity: 0, y: 28 }}
+          animate={vis ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{ marginBottom: '60px' }}
+        >
+          <p style={{
+            fontFamily: '"Courier New", monospace', fontSize: '0.75rem',
+            letterSpacing: '0.26em', color: 'rgba(120,200,255,0.55)',
+            textTransform: 'uppercase', marginBottom: '12px'
+          }}>Selected Work</p>
+          <h2 style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 'clamp(1.9rem, 4vw, 3rem)',
+            fontWeight: 400, color: 'white',
+            borderBottom: '1px solid rgba(255,255,255,0.07)', paddingBottom: '26px'
+          }}>Projects</h2>
+        </motion.div>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 460px), 1fr))',
+          gap: '18px'
+        }}>
+          {projects.map((p, i) => <ProjectCard key={p.id} project={p} index={i} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Footer
+function Footer() {
+  const links = [
+    { label: 'GitHub', href: 'https://github.com/PyroJayxX' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/edrill-bilan/' },
+    { label: 'Email', href: 'mailto:efbilan@gmail.com' },
+  ];
+  const ref = useRef(null);
+  const [vis, setVis] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVis(true); }, { threshold: 0.12 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <footer ref={ref} style={{
+      background: '#000000', borderTop: '1px solid rgba(255,255,255,0.06)',
+      padding: 'clamp(60px, 8vh, 100px) clamp(24px, 8vw, 100px)'
+    }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          animate={vis ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '44px' }}
+        >
+          <div>
+            <h3 style={{
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontSize: 'clamp(1.5rem, 3vw, 2.3rem)',
+              fontWeight: 400, color: 'white', marginBottom: '14px'
+            }}>
+              Let's build something<br /><em>worth remembering.</em>
+            </h3>
+            <a href="mailto:efbilan@gmail.com" style={{
+              fontFamily: '"Courier New", monospace', fontSize: '0.82rem',
+              letterSpacing: '0.1em', color: 'rgba(120,200,255,0.7)',
+              textDecoration: 'none', borderBottom: '1px solid rgba(120,200,255,0.28)', paddingBottom: '2px'
+            }}>efbilan@gmail.com</a>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', alignItems: 'flex-end' }}>
+            <p style={{
+              fontFamily: '"Courier New", monospace', fontSize: '0.65rem',
+              letterSpacing: '0.22em', color: 'rgba(255,255,255,0.25)',
+              textTransform: 'uppercase', marginBottom: '4px'
+            }}>Connect</p>
+            {links.map(l => (
+              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
+                style={{
+                  fontFamily: '"Courier New", monospace', fontSize: '0.82rem',
+                  letterSpacing: '0.1em', color: 'rgba(255,255,255,0.5)',
+                  textDecoration: 'none', transition: 'color 0.25s'
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = 'rgba(120,200,255,0.9)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
+              >{l.label} ↗</a>
+            ))}
+          </div>
+        </motion.div>
+        <div style={{
+          marginTop: '60px', paddingTop: '22px',
+          borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+          display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px'
+        }}>
+          <p style={{ fontFamily: '"Courier New", monospace', fontSize: '0.68rem', color: 'rgba(255,255,255,0.18)' }}>
+            © {new Date().getFullYear()} Edrill Falziz Bilan
+          </p>
+          <p style={{ fontFamily: '"Courier New", monospace', fontSize: '0.68rem', color: 'rgba(255,255,255,0.18)' }}>
+            PLM · Computer Science
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// App
+export default function App() {
+  return (
+    <div style={{ margin: 0, padding: 0, background: '#000' }}>
+      <TopNav />
+      {/* Hero carousel */}
+      <div id="hero" style={{ position: 'relative', height: '100vh', overflow: 'hidden', scrollMarginTop: '72px' }}>
+        <VideoBackground />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.32)', zIndex: 1 }} />
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: '220px',
+          background: 'linear-gradient(to bottom, transparent, #000000)',
+          zIndex: 2, pointerEvents: 'none'
+        }} />
+        <div style={{ position: 'relative', zIndex: 3, height: '100%' }}>
+          <Carousel />
+        </div>
+      </div>
+
+      <ProjectsSection />
+      <Footer />
+    </div>
+  );
+}
