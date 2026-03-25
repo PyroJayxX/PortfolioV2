@@ -166,7 +166,7 @@ function BioSlide() {
         <p style={{
           fontFamily: '"Courier New", monospace',
           fontSize: 'clamp(0.8rem, 1.15vw, 0.95rem)',
-          opacity: 0.7, lineHeight: 1.95, marginBottom: '36px', maxWidth: '580px'
+          opacity: 0.7, lineHeight: 1.95, margin: '0 auto 36px', maxWidth: '580px'
         }}>
           An aspiring Software Engineer studying Computer Science at
           Pamantasan ng Lungsod ng Maynila (PLM). I build things that
