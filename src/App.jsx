@@ -23,6 +23,15 @@ function TopNav() {
         alignItems: 'center',
         minHeight: '62px'
       }}>
+        <img
+          src="/logo.svg"
+          alt="Logo"
+          style={{
+            height: '32px',
+            width: 'auto',
+            marginRight: '32px'
+          }}
+        />
         <div style={{
           position: 'relative',
           display: 'flex',
@@ -54,13 +63,24 @@ function TopNav() {
             borderRadius: '999px',
             background: 'transparent'
           }}>Projects</a>
+          <a href="/resume.pdf" download style={{
+            fontFamily: '"Courier New", monospace',
+            fontSize: '0.92rem',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.82)',
+            textDecoration: 'none',
+            padding: '8px 16px',
+            border: '1px solid rgba(255,255,255,0.35)',
+            borderRadius: '999px',
+            background: 'transparent'
+          }}>My Resume</a>
         </div>
       </div>
     </nav>
   );
 }
 
-// Video Background 
 function VideoBackground() {
   const videoRef = useRef(null);
   useEffect(() => {
@@ -80,7 +100,6 @@ function VideoBackground() {
   );
 }
 
-// Hero Slide
 function HeroSlide() {
   return (
     <div style={{
@@ -113,7 +132,6 @@ function HeroSlide() {
   );
 }
 
-// Bio Slide
 function BioSlide() {
   const skills = [
     'C','C++','Java','Python','Go',
@@ -131,7 +149,7 @@ function BioSlide() {
         initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -28 }}
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        style={{ maxWidth: '860px', width: '100%' }}
+        style={{ maxWidth: '860px', width: '100%', textAlign: 'center' }}
       >
         <p style={{
           fontFamily: '"Courier New", monospace', fontSize: '0.75rem',
@@ -154,7 +172,7 @@ function BioSlide() {
           Pamantasan ng Lungsod ng Maynila (PLM). I build things that
           sit at the intersection of logic and craft.
         </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '9px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '9px', justifyContent: 'center' }}>
           {skills.map(s => (
             <span key={s} style={{
               fontFamily: '"Courier New", monospace',
@@ -171,7 +189,6 @@ function BioSlide() {
   );
 }
 
-// Carousel
 const SLIDE_DURATION = 5500;
 
 function Carousel() {
@@ -244,7 +261,6 @@ function Carousel() {
         ))}
       </div>
 
-      {/* Scroll hint */}
       <div style={{
         position: 'absolute', bottom: '36px', right: '44px',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -265,7 +281,6 @@ function Carousel() {
   );
 }
 
-// Projects
 const projects = [
   {
     id: 1, title: 'Bilandog E-Commerce System',
@@ -282,7 +297,7 @@ const projects = [
   {
     id: 3, title: 'AI Pulmonary Nodule Detection',
     tag: 'Deep Learning · ResNet50',
-    desc: 'Trained a ResNet-50 model to detect pulmonary nodules in chest X-rays for early lung cancer screening.',
+    desc: 'Enhanced ResNet-50 architecture to detect pulmonary nodules in chest X-rays for early lung cancer screening.',
     link: 'https://github.com/PyroJayxX/Thoracic-Disease-Classifier-ResNet50'
   },
   {
@@ -304,6 +319,150 @@ const projects = [
     link: 'https://github.com/sonajX/DodgeBall-ASM-Game'
   },
 ];
+
+const galleryPhotos = [
+  '/1.jpg',
+  '/2.jpg',
+  '/3.jpg',
+  '/4.jpg',
+  '/10.jpg',
+  '/6.jpg',
+  '/5.jpg',
+  '/7.jpg',
+  '/8.jpg',
+  '/9.jpg'
+];
+
+function PhotoCarouselSection({ sharedBackground = false }) {
+  const loopedPhotos = [...galleryPhotos, ...galleryPhotos];
+
+  return (
+    <section style={{
+      position: 'relative',
+      background: sharedBackground ? 'transparent' : '#000000',
+      minHeight: '72vh',
+      display: 'flex',
+      alignItems: 'center',
+      overflow: 'hidden'
+    }}>
+      {!sharedBackground && (
+        <StarsBackground
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          factor={0.06}
+          speed={60}
+          starColor="#ffffff"
+        />
+      )}
+
+      {!sharedBackground && (
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(circle at 50% 35%, rgba(255,255,255,0.05), rgba(0,0,0,0.86) 62%)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }} />
+      )}
+
+      <div style={{
+        position: 'relative',
+        zIndex: 2,
+        width: '100%',
+        padding: 'clamp(48px, 8vh, 86px) 0'
+      }}>
+        <div style={{
+          maxWidth: '1100px',
+          margin: '0 auto',
+          padding: '0 clamp(24px, 8vw, 100px)'
+        }}>
+          <p style={{
+            fontFamily: '"Courier New", monospace',
+            fontSize: '0.75rem',
+            letterSpacing: '0.26em',
+            color: 'rgba(255,255,255,0.5)',
+            textTransform: 'uppercase',
+            marginBottom: '18px'
+          }}>Photo Reel</p>
+          <h2 style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 'clamp(1.7rem, 3.6vw, 2.8rem)',
+            fontWeight: 400,
+            color: 'white',
+            marginBottom: '30px'
+          }}>A few moments from my universe</h2>
+        </div>
+
+        <div style={{
+          position: 'relative',
+          overflow: 'hidden',
+          width: '100%'
+        }}>
+          <motion.div
+            style={{
+              display: 'flex',
+              width: 'max-content',
+              gap: '16px',
+              padding: '0 clamp(16px, 4vw, 32px)'
+            }}
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{
+              duration: 32,
+              ease: 'linear',
+              repeat: Infinity,
+            }}
+          >
+            {loopedPhotos.map((src, idx) => (
+              <div
+                key={`${src}-${idx}`}
+                style={{
+                  flex: '0 0 auto',
+                  width: 'clamp(230px, 34vw, 410px)',
+                  aspectRatio: '4 / 3',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(255,255,255,0.18)',
+                  background: 'rgba(255,255,255,0.03)',
+                  boxShadow: '0 12px 36px rgba(0,0,0,0.35)'
+                }}
+              >
+                <img
+                  src={src}
+                  alt={`Gallery photo ${(idx % galleryPhotos.length) + 1}`}
+                  loading="lazy"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+              </div>
+            ))}
+          </motion.div>
+
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            width: 'min(14vw, 120px)',
+            background: 'linear-gradient(to right, rgba(0,0,0,0.94), rgba(0,0,0,0))',
+            pointerEvents: 'none'
+          }} />
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            right: 0,
+            width: 'min(14vw, 120px)',
+            background: 'linear-gradient(to left, rgba(0,0,0,0.94), rgba(0,0,0,0))',
+            pointerEvents: 'none'
+          }} />
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function ProjectCard({ project, index }) {
   const [hovered, setHovered] = useState(false);
@@ -362,7 +521,7 @@ function ProjectCard({ project, index }) {
   );
 }
 
-function ProjectsSection() {
+function ProjectsSection({ sharedBackground = false }) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
   useEffect(() => {
@@ -372,17 +531,18 @@ function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" style={{ position: 'relative', background: '#000000', minHeight: '100vh', scrollMarginTop: '72px' }}>
-      {/* Stars fills the whole section */}
-      <StarsBackground
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-        factor={0.06}
-        speed={60}
-        starColor="#ffffff"
-      />
+    <section id="projects" style={{ position: 'relative', background: sharedBackground ? 'transparent' : '#000000', minHeight: '100vh', scrollMarginTop: '72px' }}>
+      {!sharedBackground && (
+        <StarsBackground
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          factor={0.06}
+          speed={60}
+          starColor="#ffffff"
+        />
+      )}
       <div style={{
         position: 'relative', zIndex: 1,
-        padding: 'clamp(80px, 10vh, 130px) clamp(24px, 8vw, 100px)',
+        padding: 'clamp(44px, 6vh, 84px) clamp(24px, 8vw, 100px)',
         maxWidth: '1100px', margin: '0 auto'
       }}>
         <motion.div ref={ref}
@@ -395,7 +555,7 @@ function ProjectsSection() {
             fontFamily: '"Courier New", monospace', fontSize: '0.75rem',
             letterSpacing: '0.26em', color: 'rgba(120,200,255,0.55)',
             textTransform: 'uppercase', marginBottom: '12px'
-          }}>Selected Work</p>
+          }}>Relevant Works</p>
           <h2 style={{
             fontFamily: 'Georgia, "Times New Roman", serif',
             fontSize: 'clamp(1.9rem, 4vw, 3rem)',
@@ -415,7 +575,6 @@ function ProjectsSection() {
   );
 }
 
-// Footer
 function Footer() {
   const links = [
     { label: 'GitHub', href: 'https://github.com/PyroJayxX' },
@@ -510,7 +669,18 @@ export default function App() {
         </div>
       </div>
 
-      <ProjectsSection />
+      <div style={{ position: 'relative', background: '#000000' }}>
+        <StarsBackground
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          factor={0.06}
+          speed={60}
+          starColor="#ffffff"
+        />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <PhotoCarouselSection sharedBackground />
+          <ProjectsSection sharedBackground />
+        </div>
+      </div>
       <Footer />
     </div>
   );
