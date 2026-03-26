@@ -330,7 +330,8 @@ const galleryPhotos = [
   '/5.jpg',
   '/7.jpg',
   '/8.jpg',
-  '/9.jpg'
+  '/9.jpg',
+  '/11.jpg'
 ];
 
 function PhotoCarouselSection({ sharedBackground = false }) {
