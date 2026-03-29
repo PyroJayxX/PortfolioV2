@@ -12,6 +12,7 @@ export const PROJECTS = [
     title: 'Bilandog E-Commerce System',
     tag: 'Full-Stack · React · Django',
     desc: 'A full-stack e-commerce platform built to practice React and Django, featuring product listings, cart, and order management.',
+    mockup: '/bilandog.png',
     link: 'https://github.com/PyroJayxX/Bilandog-Ecommerce-V2'
   },
   {
@@ -19,6 +20,7 @@ export const PROJECTS = [
     title: 'Fantasy Flip: Android Card Game',
     tag: 'Mobile · Android Studio · Firebase',
     desc: 'Lead developer on a full-stack Android card game with real-time multiplayer and Firebase backend.',
+    mockup: '/fantasyflip.png',
     link: 'https://github.com/PyroJayxX/MobileGame-AppDev-Project'
   },
   {
@@ -26,6 +28,7 @@ export const PROJECTS = [
     title: 'AI Pulmonary Nodule Detection',
     tag: 'Deep Learning · ResNet50',
     desc: 'Enhanced ResNet-50 architecture to detect pulmonary nodules in chest X-rays for early lung cancer screening.',
+    mockup: '/clara.jpg',
     link: 'https://github.com/PyroJayxX/Thoracic-Disease-Classifier-ResNet50'
   },
   {
@@ -33,6 +36,7 @@ export const PROJECTS = [
     title: 'Irregular Enrollment System',
     tag: 'Front-End · JavaFX · Figma',
     desc: "Front-end developer and designer for PLM's irregular enrollment system, from wireframe to implementation.",
+    mockup: '/plmcrs.png',
     link: 'https://github.com/chaotic-braindead/Enrollment'
   },
   {
@@ -40,6 +44,7 @@ export const PROJECTS = [
     title: 'DOM Programming Language',
     tag: 'Language Design · Interpreter',
     desc: 'Lead developer of DOM — a customized web-based interpreted programming language with its own IDE.',
+    mockup: '/dom.png',
     link: 'https://github.com/IEMDomain04/DOM-IDE'
   },
   {
@@ -47,6 +52,7 @@ export const PROJECTS = [
     title: 'BlitzBall — x86 Assembly',
     tag: 'Game Dev · x86 ASM · DOSBox',
     desc: 'Co-developer of a dodgeball-inspired game built entirely in x86 assembly running inside a DOSBox emulator.',
+    mockup: '/blitzball.png',
     link: 'https://github.com/sonajX/DodgeBall-ASM-Game'
   }
 ];

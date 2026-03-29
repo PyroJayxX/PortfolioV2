@@ -29,10 +29,13 @@ function ProjectCard({ project, index }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        display: 'block',
+        display: 'grid',
+        gridTemplateColumns: 'minmax(150px, 220px) 1fr',
+        alignItems: 'stretch',
+        gap: '18px',
         textDecoration: 'none',
         color: 'inherit',
-        padding: '30px',
+        padding: '18px',
         background: hovered ? 'rgba(120,200,255,0.06)' : 'rgba(255,255,255,0.03)',
         border: `1px solid ${hovered ? 'rgba(120,200,255,0.22)' : 'rgba(255,255,255,0.07)'}`,
         borderRadius: '6px',
@@ -42,49 +45,78 @@ function ProjectCard({ project, index }) {
       }}
     >
       <div style={{
-        fontFamily: '"Courier New", monospace',
-        fontSize: '0.65rem',
-        letterSpacing: '0.2em',
-        textTransform: 'uppercase',
-        color: hovered ? 'rgba(120,200,255,0.85)' : 'rgba(255,255,255,0.3)',
-        marginBottom: '11px',
-        transition: 'color 0.3s'
-      }}>{project.tag}</div>
-
-      <h3 style={{
-        fontFamily: 'Georgia, "Times New Roman", serif',
-        fontSize: '1.2rem',
-        fontWeight: 400,
-        color: 'white',
-        marginBottom: '11px',
-        lineHeight: 1.3
-      }}>{project.title}</h3>
-
-      <p style={{
-        fontFamily: '"Courier New", monospace',
-        fontSize: '0.8rem',
-        lineHeight: 1.85,
-        color: 'rgba(255,255,255,0.48)'
-      }}>{project.desc}</p>
-
-      <div style={{
-        marginTop: '18px',
-        fontFamily: '"Courier New", monospace',
-        fontSize: '0.68rem',
-        letterSpacing: '0.14em',
-        textTransform: 'uppercase',
-        color: hovered ? 'rgba(120,200,255,0.75)' : 'rgba(255,255,255,0.18)',
+        borderRadius: '4px',
+        overflow: 'hidden',
+        marginRight: '8px',
+        border: `1px solid ${hovered ? 'rgba(120,200,255,0.25)' : 'rgba(255,255,255,0.08)'}`,
+        minHeight: '132px',
+        height: '100%',
+        background: 'rgba(0,0,0,0.35)',
         display: 'flex',
         alignItems: 'center',
-        gap: '5px',
-        transition: 'color 0.3s'
+        justifyContent: 'center'
       }}>
-        View on GitHub
-        <span style={{
-          display: 'inline-block',
-          transform: hovered ? 'translateX(4px)' : 'translateX(0)',
-          transition: 'transform 0.3s'
-        }}>→</span>
+        <img
+          src={project.mockup}
+          alt={`${project.title} mockup`}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+            objectPosition: 'center',
+            display: 'block',
+            transform: hovered ? 'scale(1.03)' : 'scale(1)',
+            transition: 'transform 0.4s ease'
+          }}
+        />
+      </div>
+
+      <div style={{ textAlign: 'left' }}>
+        <div style={{
+          fontFamily: '"Courier New", monospace',
+          fontSize: '0.65rem',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: hovered ? 'rgba(120,200,255,0.85)' : 'rgba(255,255,255,0.3)',
+          marginBottom: '11px',
+          transition: 'color 0.3s'
+        }}>{project.tag}</div>
+
+        <h3 style={{
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontSize: '1.2rem',
+          fontWeight: 400,
+          color: 'white',
+          marginBottom: '11px',
+          lineHeight: 1.3
+        }}>{project.title}</h3>
+
+        <p style={{
+          fontFamily: '"Courier New", monospace',
+          fontSize: '0.8rem',
+          lineHeight: 1.85,
+          color: 'rgba(255,255,255,0.48)'
+        }}>{project.desc}</p>
+
+        <div style={{
+          marginTop: '18px',
+          fontFamily: '"Courier New", monospace',
+          fontSize: '0.68rem',
+          letterSpacing: '0.14em',
+          textTransform: 'uppercase',
+          color: hovered ? 'rgba(120,200,255,0.75)' : 'rgba(255,255,255,0.18)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '5px',
+          transition: 'color 0.3s'
+        }}>
+          View on GitHub
+          <span style={{
+            display: 'inline-block',
+            transform: hovered ? 'translateX(4px)' : 'translateX(0)',
+            transition: 'transform 0.3s'
+          }}>→</span>
+        </div>
       </div>
     </motion.a>
   );
@@ -148,7 +180,7 @@ export default function ProjectsSection({ sharedBackground = false }) {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 460px), 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 560px), 1fr))',
           gap: '18px'
         }}>
           {PROJECTS.map((project, index) => (
