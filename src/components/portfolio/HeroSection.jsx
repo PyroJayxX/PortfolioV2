@@ -100,7 +100,7 @@ function TopNav() {
             style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.82)', border: '1px solid rgba(255,255,255,0.35)' }}
             whileHover={hoverEffect}
           >
-            Professional Portfolio
+            Professional Theme
           </motion.a>
         </div>
       </div>
