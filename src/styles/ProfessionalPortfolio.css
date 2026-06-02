@@ -1,0 +1,98 @@
+/* Base Layout */
+.pf-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .pf-layout {
+    grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.85fr);
+  }
+}
+
+/* Profile Header */
+.pf-profile-container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+@media (min-width: 640px) {
+  .pf-profile-container {
+    flex-direction: row;
+    align-items: stretch;
+    text-align: left;
+  }
+}
+
+.pf-profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 30px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+}
+@media (min-width: 640px) {
+  .pf-profile-img {
+    width: 160px;
+    height: auto;
+  }
+}
+
+.pf-header-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+}
+@media (min-width: 640px) {
+  .pf-header-row {
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+}
+
+.pf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 640px) {
+  .pf-actions {
+    justify-content: flex-start;
+  }
+}
+
+/* Projects Grid */
+.pf-project-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .pf-project-card {
+    grid-template-columns: 140px 1fr;
+  }
+}
+
+/* About & Milestones Grid */
+.pf-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .pf-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  }
+}
