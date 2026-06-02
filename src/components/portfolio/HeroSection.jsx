@@ -5,6 +5,34 @@ import { SKILLS } from '../../data/portfolioData';
 const SLIDE_DURATION = 5500;
 
 function TopNav() {
+  const baseLinkStyle = {
+    fontFamily: '"Courier New", monospace',
+    fontSize: '0.92rem',
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    padding: '8px 16px',
+    borderRadius: '999px',
+    background: 'transparent',
+    transition: 'border 0.2s ease', // Let Framer Motion handle background/color
+    cursor: 'pointer'
+  };
+
+  // Intercept the click to scroll smoothly without triggering a route change
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const hoverEffect = {
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    borderColor: '#ffffff'
+  };
+
   return (
     <nav style={{
       position: 'fixed',
@@ -39,44 +67,42 @@ function TopNav() {
           display: 'flex',
           gap: '14px',
           padding: '8px 12px',
-          background: 'transparent'
+          background: 'transparent',
+          flexWrap: 'wrap',
+          justifyContent: 'center'
         }}>
-          <a href="#hero" style={{
-            fontFamily: '"Courier New", monospace',
-            fontSize: '0.92rem',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.9)',
-            textDecoration: 'none',
-            padding: '8px 16px',
-            border: '1px solid rgba(255,255,255,0.45)',
-            borderRadius: '999px',
-            background: 'transparent'
-          }}>Hero</a>
-          <a href="#projects" style={{
-            fontFamily: '"Courier New", monospace',
-            fontSize: '0.92rem',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.82)',
-            textDecoration: 'none',
-            padding: '8px 16px',
-            border: '1px solid rgba(255,255,255,0.35)',
-            borderRadius: '999px',
-            background: 'transparent'
-          }}>Projects</a>
-          <a href="/resume.pdf" download style={{
-            fontFamily: '"Courier New", monospace',
-            fontSize: '0.92rem',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.82)',
-            textDecoration: 'none',
-            padding: '8px 16px',
-            border: '1px solid rgba(255,255,255,0.35)',
-            borderRadius: '999px',
-            background: 'transparent'
-          }}>My Resume</a>
+          <motion.a 
+            href="#hero" 
+            onClick={(e) => handleScroll(e, 'hero')}
+            style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.9)', border: '1px solid rgba(255,255,255,0.45)' }}
+            whileHover={hoverEffect}
+          >
+            Hero
+          </motion.a>
+          <motion.a 
+            href="#projects" 
+            onClick={(e) => handleScroll(e, 'projects')}
+            style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.82)', border: '1px solid rgba(255,255,255,0.35)' }}
+            whileHover={hoverEffect}
+          >
+            Projects
+          </motion.a>
+          <motion.a 
+            href="/Bilan_CV_2026.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.82)', border: '1px solid rgba(255,255,255,0.35)' }}
+            whileHover={hoverEffect}
+          >
+            My Resume
+          </motion.a>
+          <motion.a 
+            href="/" 
+            style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.82)', border: '1px solid rgba(255,255,255,0.35)' }}
+            whileHover={hoverEffect}
+          >
+            Professional Portfolio
+          </motion.a>
         </div>
       </div>
     </nav>
