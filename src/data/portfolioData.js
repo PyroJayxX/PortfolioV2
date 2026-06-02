@@ -1,3 +1,22 @@
+export const SKILL_GROUPS = [
+  {
+    title: 'Programming Languages',
+    items: ['Java', 'SQL', 'C', 'Python', 'Go', 'x86 Assembly', 'JavaScript', 'TypeScript', 'HTML', 'CSS']
+  },
+  {
+    title: 'Machine Learning',
+    items: ['PyTorch', 'TensorFlow', 'timm', 'scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy']
+  },
+  {
+    title: 'Backend Development',
+    items: ['MySQL', 'PostgreSQL', 'Django', 'Flask', 'ExpressJS', 'FastAPI', 'Firebase', 'Supabase']
+  },
+  {
+    title: 'Frontend & Tools',
+    items: ['ReactJS', 'NextJS', 'Tailwind CSS', 'JavaFX', 'Git', 'Android Studio', 'Figma', 'Vercel', 'Ollama']
+  }
+];
+
 export const SKILLS = [
   'C', 'C++', 'Java', 'Python', 'Go',
   'HTML5', 'CSS3', 'JavaScript',
