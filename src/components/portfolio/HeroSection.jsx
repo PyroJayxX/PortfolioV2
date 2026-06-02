@@ -14,11 +14,10 @@ function TopNav() {
     padding: '8px 16px',
     borderRadius: '999px',
     background: 'transparent',
-    transition: 'border 0.2s ease', // Let Framer Motion handle background/color
+    transition: 'border 0.2s ease', 
     cursor: 'pointer'
   };
 
-  // Intercept the click to scroll smoothly without triggering a route change
   const handleScroll = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -169,7 +168,7 @@ function HeroSlide() {
           opacity: 0.5,
           marginBottom: '26px',
           textTransform: 'uppercase'
-        }}>Software Engineer · Computer Science</p>
+        }}>AI/ML Engineer · Computer Science</p>
         <h1 style={{
           fontFamily: 'Georgia, "Times New Roman", serif',
           fontSize: 'clamp(2.2rem, 5vw, 4rem)',
@@ -229,7 +228,7 @@ function BioSlide() {
           margin: '0 auto 36px',
           maxWidth: '580px'
         }}>
-          An aspiring Software Engineer studying Computer Science at
+          An aspiring AI/ML Engineer studying Computer Science at
           Pamantasan ng Lungsod ng Maynila (PLM). I build things that
           sit at the intersection of logic and craft.
         </p>

@@ -1,3 +1,4 @@
+import { StarsBackground } from '@/components/animate-ui/backgrounds/stars';
 import ChatWidget from './ChatWidget';
 import Footer from './Footer';
 import HeroSection from './HeroSection';
@@ -10,6 +11,14 @@ export default function SpacePortfolio() {
       <HeroSection />
 
       <div style={{ position: 'relative', background: '#000000' }}>
+        {/* Your original moving stars are back right here */}
+        <StarsBackground
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          factor={0.06}
+          speed={60}
+          starColor="#ffffff"
+        />
+        
         <div style={{ position: 'relative', zIndex: 1 }}>
           <PhotoCarouselSection sharedBackground />
           <ProjectsSection sharedBackground />
