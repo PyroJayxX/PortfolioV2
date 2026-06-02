@@ -99,7 +99,7 @@ const chipStyle = {
 export default function ProfessionalPortfolio() {
   const MILESTONES = [
     { title: 'Research Intern — Multimedia and Computer Vision Laboratory, National Cheng Kung University, Tainan, Taiwan', year: 'Oct 2025' },
-    { title: 'IT Service Management Intern — Goldilocks Bakeshop, Inc., Greenfield Building, Mandaluyong', year: 'Jun 2025' }
+    { title: 'IT Service Management Intern — Goldilocks Bakeshop, Inc., Greenfield Building, Mayflower St. Corner Williams, Mandaluyong', year: 'Jun 2025' }
   ];
 
   return (
@@ -127,7 +127,7 @@ export default function ProfessionalPortfolio() {
                 <div style={{ flex: 1, minWidth: 240, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="pf-header-row">
                     <div>
-                      <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.75rem)', fontWeight: 800, lineHeight: 1.1, margin: '0 0 8px 0', letterSpacing: '-0.02em' }}>Edrill Falziz Bilan</h1>
+                      <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 1.75rem)', fontWeight: 700, lineHeight: 1.1, margin: '0 0 8px 0', letterSpacing: '-0.02em' }}>Edrill Falziz Bilan</h1>
                       <p style={{ fontSize: '1rem', lineHeight: 1.6, color: 'rgba(232,237,247,0.72)', margin: 0 }}>Aspiring AI/ML Engineer | Full Stack Developer</p>
                     </div>
                     <SpaceLinkButton />
