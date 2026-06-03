@@ -184,7 +184,7 @@ export default function ProfessionalPortfolio() {
             <Card>
               <SectionHeader title="Projects" icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>} />
               <div style={{ display: 'grid', gap: 14 }}>
-                {PROJECTS.slice(0, 4).map((p, i) => (<ProjectPreview key={p.id} project={p} index={i} />))}
+                {PROJECTS.slice(0, 6).map((p, i) => (<ProjectPreview key={p.id} project={p} index={i} />))}
               </div>
             </Card>
 

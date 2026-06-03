@@ -28,51 +28,52 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     id: 1,
+    title: 'Atlas990 Lead Intelligence System',
+    tag: 'Machine Learning · Full-Stack · XGBoost · FAISS',
+    desc: 'Trained an XGBoost model to calculate a 0-100 priority score for nonprofit organization leads and integrates Meta\'s FAISS library to instantly find matching lookalike organizations.',
+    mockup: '/atlas990.png',
+    link: 'https://github.com/PyroJayxX/Atlas990'
+  },
+  {
+    id: 2,
+    title: 'Attention-Based Pulmonary Nodule Detection on CXR',
+    tag: 'Deep Learning · Medical Imaging · Thesis · Computer Vision',
+    desc: 'Enhanced ResNet-50 architecture to detect pulmonary nodules in chest X-rays for early lung cancer screening as part of undergraduate thesis.',
+    mockup: '/clara.png',
+    link: 'https://www.mdpi.com/2075-4418/16/10/1574'
+  },
+  {
+    id: 3,
+    title: 'MAFA Property Management System',
+    tag: 'Full-Stack · React · ExpressJS',
+    desc: 'A property management system developed for the Inventi Hackathon enabling property managers to upload floor plans, pin issues, and efficiently manage properties.',
+    mockup: '/mafa.png',
+    link: 'https://github.com/CoderTofu/MAFA-Inventi'
+  },
+  {
+    id: 4,
     title: 'Bilandog E-Commerce System',
-    tag: 'Full-Stack · React · Django',
+    tag: 'Full-Stack · React · Django · PostgreSQL',
     desc: 'A full-stack e-commerce platform built to practice React and Django, featuring product listings, cart, and order management.',
     mockup: '/bilandog.png',
     link: 'https://github.com/PyroJayxX/Bilandog-Ecommerce-V2'
   },
   {
-    id: 2,
+    id: 5,
     title: 'Fantasy Flip: Android Card Game',
     tag: 'Mobile · Android Studio · Firebase',
-    desc: 'Lead developer on a full-stack Android card game with real-time multiplayer and Firebase backend.',
+    desc: 'Lead developer on a full-stack Android card game with real-time dashboard and Firebase backend.',
     mockup: '/fantasyflip.png',
     link: 'https://github.com/PyroJayxX/MobileGame-AppDev-Project'
   },
+
   {
-    id: 3,
-    title: 'AI Pulmonary Nodule Detection',
-    tag: 'Deep Learning · ResNet50',
-    desc: 'Enhanced ResNet-50 architecture to detect pulmonary nodules in chest X-rays for early lung cancer screening.',
-    mockup: '/clara.jpg',
-    link: 'https://github.com/PyroJayxX/Thoracic-Disease-Classifier-ResNet50'
-  },
-  {
-    id: 4,
-    title: 'Irregular Enrollment System',
-    tag: 'Front-End · JavaFX · Figma',
-    desc: "Front-end developer and designer for PLM's irregular enrollment system, from wireframe to implementation.",
-    mockup: '/plmcrs.png',
-    link: 'https://github.com/chaotic-braindead/Enrollment'
-  },
-  {
-    id: 5,
+    id: 6,
     title: 'DOM Programming Language',
     tag: 'Language Design · Interpreter',
     desc: 'Lead developer of DOM — a customized web-based interpreted programming language with its own IDE.',
     mockup: '/dom.png',
     link: 'https://github.com/IEMDomain04/DOM-IDE'
-  },
-  {
-    id: 6,
-    title: 'BlitzBall — x86 Assembly',
-    tag: 'Game Dev · x86 ASM · DOSBox',
-    desc: 'Co-developer of a dodgeball-inspired game built entirely in x86 assembly running inside a DOSBox emulator.',
-    mockup: '/blitzball.png',
-    link: 'https://github.com/sonajX/DodgeBall-ASM-Game'
   }
 ];
 
