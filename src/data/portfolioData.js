@@ -97,3 +97,26 @@ export const FOOTER_LINKS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/edrill-bilan/' },
   { label: 'Email', href: 'mailto:efbilan@gmail.com' }
 ];
+
+export const CERTIFICATES = [
+  {
+    title: 'MDPI Certificate of Publication',
+    sub: 'RNNet-MST Article Acceptance',
+    mockup: '/cert_publication.png'
+  },
+  {
+    title: 'Intermediate Machine Learning',
+    sub: 'Kaggle Micro-Credential Verification',
+    mockup: '/cert_intermediate.png'
+  },
+  {
+    title: 'Network Technician Examination',
+    sub: 'Cisco Learning Career Certificate',
+    mockup: '/cert_technician.png'
+  },
+  {
+    title: 'Google Developer Student Club',
+    sub: 'Googler Volunteer Completion Certificate',
+    mockup: '/cert_googler.png'
+  }
+];

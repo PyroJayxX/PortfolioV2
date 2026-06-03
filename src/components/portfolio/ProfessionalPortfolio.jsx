@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { FOOTER_LINKS, PROJECTS, SKILL_GROUPS } from '../../data/portfolioData';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { FOOTER_LINKS, PROJECTS, SKILL_GROUPS, CERTIFICATES } from '../../data/portfolioData';
 import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import ChatWidget from './ChatWidget';
 
@@ -17,9 +18,10 @@ function SectionHeader({ icon, title }) {
   );
 }
 
-function Card({ children, style = {} }) {
+function Card({ children, style = {}, onClick }) {
   return (
     <motion.div
+      onClick={onClick}
       whileHover={{ borderColor: 'rgba(255,255,255,0.15)', boxShadow: '0 24px 64px rgba(0,0,0,0.4)' }}
       style={{
         background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
@@ -30,6 +32,7 @@ function Card({ children, style = {} }) {
         borderRadius: 24,
         padding: 24, 
         transition: 'border 0.3s ease, box-shadow 0.3s ease',
+        cursor: onClick ? 'pointer' : 'default',
         ...style
       }}
     >
@@ -46,18 +49,19 @@ function SpaceLinkButton() {
       aria-label="Space theme"
       className="pf-space-btn"
       style={{
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: 999,
+        display: 'inline-flex', alignItems: 'center', justifycenter: 'center', borderRadius: 999,
         border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.9)',
         textDecoration: 'none', fontWeight: 600, letterSpacing: '0.01em', 
-        gap: 5,                  // Reduced gap between text and arrow
-        padding: '5px 12px',     // Smaller padding
-        fontSize: '0.75rem'      // Smaller font size
+        gap: 5,                  
+        padding: '5px 12px',     
+        fontSize: '0.75rem'      
       }}
     >
       <span>Space theme</span><span style={{ opacity: 0.75, fontSize: '0.85em' }}>↗</span>
     </motion.a>
   );
 }
+
 function ProjectPreview({ project, index }) {
   return (
     <motion.a
@@ -97,6 +101,8 @@ const chipStyle = {
 // --- Main Layout ---
 
 export default function ProfessionalPortfolio() {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   const MILESTONES = [
     { title: 'Research Intern — Multimedia and Computer Vision Laboratory, National Cheng Kung University, Tainan, Taiwan', year: 'Oct 2025' },
     { title: 'IT Service Management Intern — Goldilocks Bakeshop, Inc., Greenfield Building, Mayflower St. Corner Williams, Mandaluyong', year: 'Jun 2025' }
@@ -167,14 +173,13 @@ export default function ProfessionalPortfolio() {
                     { title: 'Q1 Publication', sub: 'Undergraduate Thesis published in MDPI Diagnostics, indexed in Web of Science' },
                     { title: 'International Collaboration', sub: 'Participated in PLM-NCKU research collaboration at MMCV Laboratory' }
                   ].map((m) => (
-                    <motion.div 
+                    <div 
                       key={m.title}
-                      whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.1)' }}
                       style={{ display: 'flex', flexDirection: 'column', gap: 4, padding: '12px 16px', borderRadius: 14, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderLeft: '3px solid rgba(255,255,255,0.2)', boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.2)' }}
                     >
                       <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#fff' }}>{m.title}</div>
                       <div style={{ fontSize: '0.85rem', color: 'rgba(232,237,247,0.6)' }}>{m.sub}</div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </Card>
@@ -204,7 +209,7 @@ export default function ProfessionalPortfolio() {
                     const [role, company] = m.title.includes(' — ') ? m.title.split(' — ') : [m.title, ''];
                     
                     return (
-                      <motion.div key={m.title} whileHover={{ backgroundColor: 'rgba(255,255,255,0.03)' }} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', position: 'relative', padding: 8, marginLeft: -8, borderRadius: 12 }}>
+                      <div key={m.title} style={{ display: 'flex', gap: 16, alignItems: 'flex-start', position: 'relative', padding: 8, marginLeft: -8, borderRadius: 12 }}>
                         {/* Timeline Dot */}
                         <div style={{ width: 12, height: 12, borderRadius: '50%', background: idx === 0 ? '#ffffff' : '#0b0d12', border: idx === 0 ? 'none' : '2px solid rgba(255,255,255,0.15)', boxShadow: idx === 0 ? '0 0 8px rgba(255,255,255,0.5)' : 'none', marginTop: 4, position: 'relative', zIndex: 2, flexShrink: 0 }} />
                         
@@ -219,7 +224,7 @@ export default function ProfessionalPortfolio() {
                             </div>
                           </div>
 
-                          {/* Bottom Row: Description (Spans full width) */}
+                          {/* Bottom Row: Description */}
                           {company && (
                             <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>
                               {company}
@@ -227,10 +232,35 @@ export default function ProfessionalPortfolio() {
                           )}
 
                         </div>
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </div>
+              </div>
+            </Card>
+
+            {/* Certifications Card */}
+            <Card>
+              <SectionHeader title="Certifications" icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>} />
+              <div style={{ display: 'grid', gap: 10 }}>
+                {CERTIFICATES.map((c) => (
+                  <motion.div
+                    key={c.title}
+                    onClick={() => setSelectedCert(c)}
+                    whileHover={{ scale: 1.02, backgroundColor: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.1)' }}
+                    style={{ 
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
+                      padding: '12px 14px', borderRadius: 14, background: 'rgba(255,255,255,0.015)', 
+                      border: '1px solid rgba(255,255,255,0.04)', cursor: 'pointer', transition: 'all 0.2s' 
+                    }}
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                      <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#fff' }}>{c.title}</span>
+                      <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)' }}>{c.sub}</span>
+                    </div>
+                    <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem' }}>View ↗</span>
+                  </motion.div>
+                ))}
               </div>
             </Card>
 
@@ -257,39 +287,72 @@ export default function ProfessionalPortfolio() {
               </div>
             </Card>
 
-            {/* Contact Card */}
-            <Card>
-              <SectionHeader title="Contact" icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>} />
-              <div style={{ display: 'grid', gap: 10 }}>
-                {FOOTER_LINKS.map((link) => {
-                  const isMail = link.href.startsWith('mailto:');
-                  const Icon = link.label === 'GitHub' ? FaGithub : link.label === 'LinkedIn' ? FaLinkedinIn : FaEnvelope;
-                  
-                  return (
-                    <motion.a 
-                      key={link.label} 
-                      href={link.href} 
-                      target={isMail ? '_self' : '_blank'} 
-                      rel={isMail ? undefined : 'noopener noreferrer'} 
-                      whileHover={{ backgroundColor: 'rgba(255,255,255,0.06)', paddingLeft: 18, borderColor: 'rgba(255,255,255,0.1)' }}
-                      style={{ textDecoration: 'none', color: 'rgba(255,255,255,0.9)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 14px', borderRadius: 12, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}
-                    >
-                      <div style={{ display: 'flex', gap: 12, alignItems: 'center', fontWeight: 500 }}>
-                        <Icon size={18} style={{ opacity: 0.7 }} />
-                        <span>{link.label}</span>
-                      </div>
-                      <span style={{ color: 'rgba(255,255,255,0.3)' }}>{isMail ? '' : '↗'}</span>
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </Card>
-
-          </div>
+           </div>
         </section>
       </div>
 
       <ChatWidget />
+
+      {/* NEW: Lightbox Modal Overlay */}
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 100,
+              background: 'rgba(5, 7, 10, 0.85)', backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)', display: 'flex',
+              alignItems: 'center', justifyContent: 'center', padding: 24
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: 'relative', maxWidth: '800px', width: '100%',
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))',
+                border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24,
+                boxShadow: '0 32px 64px rgba(0,0,0,0.6)', padding: 12,
+                boxSizing: 'border-box', textAlign: 'center'
+              }}
+            >
+              <button 
+                onClick={() => setSelectedCert(null)}
+                style={{
+                  position: 'absolute', top: 16, right: 16,
+                  background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: '50%', width: 32, height: 32, color: '#fff',
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '1rem', fontWeight: 300, transition: 'background 0.2s'
+                }}
+                onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.15)'}
+                onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
+              >
+                ✕
+              </button>
+
+              <div style={{ padding: '12px 12px 20px 12px' }}>
+                <h4 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', color: '#fff', fontWeight: 700 }}>{selectedCert.title}</h4>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'rgba(232,237,247,0.5)' }}>{selectedCert.sub}</p>
+              </div>
+
+              <div style={{ width: '100%', borderRadius: 14, overflow: 'hidden', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.04)' }}>
+                <img 
+                  src={selectedCert.mockup} 
+                  alt={selectedCert.title} 
+                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '70vh', objectFit: 'contain' }} 
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
     </main>
   );
