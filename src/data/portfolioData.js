@@ -115,7 +115,7 @@ export const CERTIFICATES = [
     mockup: '/cert_technician.png'
   },
   {
-    title: 'Google Developer Student Club',
+    title: 'Google Developer Students Club',
     sub: 'Googler Volunteer Completion Certificate',
     mockup: '/cert_googler.png'
   }
