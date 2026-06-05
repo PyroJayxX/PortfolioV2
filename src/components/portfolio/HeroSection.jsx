@@ -43,6 +43,22 @@ function TopNav() {
       justifyContent: 'center',
       pointerEvents: 'none'
     }}>
+      {/* Dynamic injection to handle pure media query sorting rules directly on mobile devices */}
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-nav-link {
+            display: none !important;
+          }
+          .nav-container-wrapper {
+            justify-content: center !important;
+            gap: 0px !important;
+          }
+          .brand-logo-img {
+            margin-right: 14px !important;
+          }
+        }
+      `}</style>
+
       <div style={{
         pointerEvents: 'auto',
         position: 'relative',
@@ -55,23 +71,28 @@ function TopNav() {
         <img
           src="/logo.svg"
           alt="Logo"
+          className="brand-logo-img"
           style={{
             height: '32px',
             width: 'auto',
             marginRight: '32px'
           }}
         />
-        <div style={{
-          position: 'relative',
-          display: 'flex',
-          gap: '14px',
-          padding: '8px 12px',
-          background: 'transparent',
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        }}>
+        <div 
+          className="nav-container-wrapper"
+          style={{
+            position: 'relative',
+            display: 'flex',
+            gap: '14px',
+            padding: '8px 12px',
+            background: 'transparent',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}
+        >
           <motion.a 
             href="#hero" 
+            className="desktop-nav-link"
             onClick={(e) => handleScroll(e, 'hero')}
             style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.9)', border: '1px solid rgba(255,255,255,0.45)' }}
             whileHover={hoverEffect}
@@ -80,6 +101,7 @@ function TopNav() {
           </motion.a>
           <motion.a 
             href="#projects" 
+            className="desktop-nav-link"
             onClick={(e) => handleScroll(e, 'projects')}
             style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.82)', border: '1px solid rgba(255,255,255,0.35)' }}
             whileHover={hoverEffect}
@@ -88,6 +110,7 @@ function TopNav() {
           </motion.a>
           <motion.a 
             href="/Bilan_CV_2026.pdf" 
+            className="desktop-nav-link"
             target="_blank" 
             rel="noopener noreferrer" 
             style={{ ...baseLinkStyle, color: 'rgba(255,255,255,0.82)', border: '1px solid rgba(255,255,255,0.35)' }}
