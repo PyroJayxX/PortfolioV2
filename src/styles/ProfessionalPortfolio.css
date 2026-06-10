@@ -96,3 +96,67 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   }
 }
+
+.projects-scroll-container {
+  display: grid;
+  gap: 14px;
+  max-height: 850px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+
+.projects-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.projects-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
+
+/* For Webkit browsers (Chrome, Edge, Safari) */
+.projects-scroll-container::-webkit-scrollbar-thumb {
+  background: #ffffffc0; 
+  border-radius: 8px;
+}
+
+.projects-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #ffffff; 
+}
+
+/* For Firefox */
+.projects-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffffc0 rgba(255, 255, 255, 0.02);
+}
+
+/* Make the track completely invisible */
+.projects-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Hide the thumb by default */
+.projects-scroll-container::-webkit-scrollbar-thumb {
+  background: transparent; 
+  border-radius: 8px;
+}
+
+.projects-scroll-container:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.6); /* Slightly dimmed white */
+}
+
+.projects-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #ffffff; 
+}
+
+/* For Firefox */
+.projects-scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.3s ease;
+}
+
+.projects-scroll-container:hover {
+  scrollbar-color: rgba(255, 255, 255, 0.8) transparent;
+}

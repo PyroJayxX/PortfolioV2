@@ -29,8 +29,8 @@ export const PROJECTS = [
   {
     id: 1,
     title: 'OmniJuris, Philippine Legal Intelligence',
-    tag: 'RAG · LLM · FastAPI · React · ChromaDB',
-    desc: 'A retrieval-augmented generation system over Philippine jurisprudence, built on the Philippine OmniCorpus dataset. Features vector search over 800k embedded documents, cross-encoder reranking, and dual inference engines (Local Qwen3 4B & Cloud Gemini Flash).',
+    tag: 'RAG · LLM · ChromaDB',
+    desc: 'A retrieval-augmented generation system over Philippine jurisprudence built on the Philippine OmniCorpus dataset. Queries 800k embedded legal documents via semantic search and cross-encoder reranking, with dual inference engines: Local Qwen3 4B via Ollama and cloud Gemini Flash.',
     mockup: '/omnijuris.png',
     link: 'https://github.com/PyroJayxX/OmniJuris'
   },
@@ -117,9 +117,9 @@ export const CERTIFICATES = [
     mockup: '/cert_intermediate.png'
   },
   {
-    title: 'Network Technician Examination',
+    title: 'Network Support and Security',
     sub: 'Cisco Learning Career Certificate',
-    mockup: '/cert_technician.png'
+    mockup: '/cert_security.png'
   },
   {
     title: 'Google Developer Student Clubs',

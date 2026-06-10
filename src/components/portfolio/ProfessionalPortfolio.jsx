@@ -3,11 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FOOTER_LINKS, PROJECTS, SKILL_GROUPS, CERTIFICATES } from '../../data/portfolioData';
 import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import ChatWidget from './ChatWidget';
-
-// Import external responsive CSS
 import '../../styles/ProfessionalPortfolio.css';
-
-// --- Reusable UI Components ---
 
 function SectionHeader({ icon, title }) {
   return (
@@ -62,12 +58,10 @@ function SpaceLinkButton() {
   );
 }
 
-function ProjectPreview({ project, index }) {
+function ProjectPreview({ project, index, onClick }) {
   return (
-    <motion.a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.div
+      onClick={onClick}
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -75,7 +69,7 @@ function ProjectPreview({ project, index }) {
       whileHover={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.12)', y: -4, scale: 1.01 }}
       className="pf-project-card"
       style={{
-        textDecoration: 'none', color: 'inherit', padding: 14, borderRadius: 16, 
+        cursor: 'pointer', color: 'inherit', padding: 14, borderRadius: 16, 
         border: '1px solid rgba(255,255,255,0.04)', background: 'rgba(255,255,255,0.015)'
       }}
     >
@@ -88,7 +82,7 @@ function ProjectPreview({ project, index }) {
         <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#fff', marginBottom: 6 }}>{project.title}</div>
         <div style={{ fontSize: '0.9rem', color: 'rgba(232,237,247,0.64)', lineHeight: 1.6 }}>{project.desc}</div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 }
 
@@ -102,6 +96,7 @@ const chipStyle = {
 
 export default function ProfessionalPortfolio() {
   const [selectedCert, setSelectedCert] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const MILESTONES = [
     { title: 'Research Intern — Multimedia and Computer Vision Laboratory, National Cheng Kung University, Tainan, Taiwan', year: 'Oct 2025' },
@@ -187,9 +182,16 @@ export default function ProfessionalPortfolio() {
 
             {/* Projects Card */}
             <Card>
-              <SectionHeader title="Projects" icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>} />
-              <div style={{ display: 'grid', gap: 14 }}>
-                {PROJECTS.slice(0, 6).map((p, i) => (<ProjectPreview key={p.id} project={p} index={i} />))}
+              <SectionHeader title="Projects" icon={<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 17 22 12"></polyline></svg>} />
+              <div className="projects-scroll-container">
+                {PROJECTS.map((p, i) => (
+                  <ProjectPreview 
+                    key={p.id} 
+                    project={p} 
+                    index={i} 
+                    onClick={() => setSelectedProject(p)} 
+                  />
+                ))}
               </div>
             </Card>
 
@@ -293,7 +295,7 @@ export default function ProfessionalPortfolio() {
 
       <ChatWidget />
 
-      {/* NEW: Lightbox Modal Overlay */}
+      {/* Lightbox Modal Overlays */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div
@@ -329,7 +331,7 @@ export default function ProfessionalPortfolio() {
                   background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
                   borderRadius: '50%', width: 32, height: 32, color: '#fff',
                   cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1rem', fontWeight: 300, transition: 'background 0.2s'
+                  fontSize: '1rem', fontWeight: 300, transition: 'background 0.2s', zIndex: 10
                 }}
                 onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.15)'}
                 onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
@@ -348,6 +350,76 @@ export default function ProfessionalPortfolio() {
                   alt={selectedCert.title} 
                   style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '70vh', objectFit: 'contain' }} 
                 />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 100,
+              background: 'rgba(5, 7, 10, 0.85)', backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)', display: 'flex',
+              alignItems: 'center', justifyContent: 'center', padding: 24
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: 'relative', maxWidth: '800px', width: '100%',
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))',
+                border: '1px solid rgba(255,255,255,0.1)', borderRadius: 24,
+                boxShadow: '0 32px 64px rgba(0,0,0,0.6)', padding: 16,
+                boxSizing: 'border-box', textAlign: 'left',
+                display: 'flex', flexDirection: 'column', gap: 16
+              }}
+            >
+              <button 
+                onClick={() => setSelectedProject(null)}
+                style={{
+                  position: 'absolute', top: 24, right: 24,
+                  background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '50%', width: 36, height: 36, color: '#fff',
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '1rem', fontWeight: 300, transition: 'background 0.2s', zIndex: 10
+                }}
+                onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.15)'}
+                onMouseLeave={(e) => e.target.style.background = 'rgba(0,0,0,0.6)'}
+              >
+                ✕
+              </button>
+
+              <div style={{ width: '100%', borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.04)' }}>
+                <img 
+                  src={selectedProject.mockup} 
+                  alt={selectedProject.title} 
+                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '70vh', objectFit: 'contain' }} 
+                />
+              </div>
+
+              <div style={{ padding: '0 8px 8px 8px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <div style={{ fontSize: '0.8rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.56)', marginBottom: 8, fontWeight: 600 }}>{selectedProject.tag}</div>
+                <h4 style={{ margin: '0 0 12px 0', fontSize: '1.4rem', color: '#fff', fontWeight: 700 }}>{selectedProject.title}</h4>
+                <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(232,237,247,0.7)', lineHeight: 1.6, marginBottom: 24 }}>{selectedProject.desc}</p>
+                
+                <motion.a 
+                  whileHover={{ y: -2, background: 'rgba(255,255,255,0.9)', color: '#000' }}
+                  href={selectedProject.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style={{ ...chipStyle, background: '#fff', color: '#000', fontWeight: 600, padding: '12px 24px', marginTop: 'auto', alignSelf: 'flex-start' }}
+                >
+                  Visit Project ↗
+                </motion.a>
               </div>
             </motion.div>
           </motion.div>
