@@ -52,6 +52,14 @@ export const PROJECTS = [
   },
   {
     id: 4,
+    title: 'TrabaHound Job Discovery Assistant',
+    tag: 'Web Crawler · LLM-based Parsing · NextJS',
+    desc: 'A web-crawler job discovery assistant that scrapes listings and uses LLM-based resume parsing to extract skills and match candidates to relevant roles in the Philippines. Built with a Next.js frontend and a Python FastAPI backend driven by jobspy.',
+    mockup: '/trabahound.png',
+    link: 'https://github.com/PyroJayxX/TrabaHound'
+  },
+  {
+    id: 5,
     title: 'MAFA Property Management System',
     tag: 'Full-Stack · React · ExpressJS',
     desc: 'A property management system developed for the Inventi Hackathon enabling property managers to upload floor plans, pin issues, and efficiently manage properties.',
@@ -59,7 +67,7 @@ export const PROJECTS = [
     link: 'https://github.com/CoderTofu/MAFA-Inventi'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Bilandog E-Commerce System',
     tag: 'Full-Stack · React · Django · PostgreSQL',
     desc: 'A full-stack e-commerce platform built to practice React and Django, featuring product listings, cart, and order management.',
@@ -67,7 +75,7 @@ export const PROJECTS = [
     link: 'https://github.com/PyroJayxX/Bilandog-Ecommerce-V2'
   },
   {
-    id: 6,
+    id: 7,
     title: 'Fantasy Flip: Android Card Game',
     tag: 'Mobile · Android Studio · Firebase',
     desc: 'Lead developer on a full-stack Android card game with real-time dashboard and Firebase backend.',
@@ -75,7 +83,7 @@ export const PROJECTS = [
     link: 'https://github.com/PyroJayxX/MobileGame-AppDev-Project'
   },
   {
-    id: 7,
+    id: 8,
     title: 'DOM Programming Language',
     tag: 'Language Design · Interpreter',
     desc: 'Lead developer of DOM — a customized web-based interpreted programming language with its own IDE.',
