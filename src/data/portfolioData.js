@@ -5,7 +5,7 @@ export const SKILL_GROUPS = [
   },
   {
     title: 'Machine Learning',
-    items: ['PyTorch', 'TensorFlow', 'timm', 'scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy']
+    items: ['PyTorch', 'TensorFlow', 'timm', 'scikit-learn', 'LangChain', 'ChromaDB', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'SciPy']
   },
   {
     title: 'Backend Development',
@@ -28,6 +28,14 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     id: 1,
+    title: 'OmniJuris, Philippine Legal Intelligence',
+    tag: 'RAG · LLM · FastAPI · React · ChromaDB',
+    desc: 'A retrieval-augmented generation system over Philippine jurisprudence, built on the Philippine OmniCorpus dataset. Features vector search over 800k embedded documents, cross-encoder reranking, and dual inference engines (Local Qwen3 4B & Cloud Gemini Flash).',
+    mockup: '/omnijuris.png',
+    link: 'https://github.com/PyroJayxX/OmniJuris'
+  },
+  {
+    id: 2,
     title: 'Atlas990 Lead Intelligence System',
     tag: 'Machine Learning · Full-Stack · XGBoost · FAISS',
     desc: 'Trained an XGBoost model to calculate a 0-100 priority score for nonprofit organization leads and integrates Meta\'s FAISS library to instantly find matching lookalike organizations.',
@@ -35,7 +43,7 @@ export const PROJECTS = [
     link: 'https://github.com/PyroJayxX/Atlas990'
   },
   {
-    id: 2,
+    id: 3,
     title: 'Attention-Based Pulmonary Nodule Detection on CXR',
     tag: 'Deep Learning · Medical Imaging · Thesis · Computer Vision',
     desc: 'Enhanced ResNet-50 architecture to detect pulmonary nodules in chest X-rays for early lung cancer screening as part of undergraduate thesis.',
@@ -43,7 +51,7 @@ export const PROJECTS = [
     link: 'https://www.mdpi.com/2075-4418/16/10/1574'
   },
   {
-    id: 3,
+    id: 4,
     title: 'MAFA Property Management System',
     tag: 'Full-Stack · React · ExpressJS',
     desc: 'A property management system developed for the Inventi Hackathon enabling property managers to upload floor plans, pin issues, and efficiently manage properties.',
@@ -51,7 +59,7 @@ export const PROJECTS = [
     link: 'https://github.com/CoderTofu/MAFA-Inventi'
   },
   {
-    id: 4,
+    id: 5,
     title: 'Bilandog E-Commerce System',
     tag: 'Full-Stack · React · Django · PostgreSQL',
     desc: 'A full-stack e-commerce platform built to practice React and Django, featuring product listings, cart, and order management.',
@@ -59,16 +67,15 @@ export const PROJECTS = [
     link: 'https://github.com/PyroJayxX/Bilandog-Ecommerce-V2'
   },
   {
-    id: 5,
+    id: 6,
     title: 'Fantasy Flip: Android Card Game',
     tag: 'Mobile · Android Studio · Firebase',
     desc: 'Lead developer on a full-stack Android card game with real-time dashboard and Firebase backend.',
     mockup: '/fantasyflip.png',
     link: 'https://github.com/PyroJayxX/MobileGame-AppDev-Project'
   },
-
   {
-    id: 6,
+    id: 7,
     title: 'DOM Programming Language',
     tag: 'Language Design · Interpreter',
     desc: 'Lead developer of DOM — a customized web-based interpreted programming language with its own IDE.',
