@@ -125,6 +125,11 @@ export const CERTIFICATES = [
     mockup: '/cert_intermediate.png'
   },
   {
+    title: 'Supervised Learning',
+    sub: 'DataCamp Course Completion Certificate',
+    mockup: '/cert_supervised.png'
+  },
+  {
     title: 'Network Support and Security',
     sub: 'Cisco Learning Career Certificate',
     mockup: '/cert_security.png'
