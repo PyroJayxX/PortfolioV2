@@ -130,6 +130,11 @@ export const CERTIFICATES = [
     mockup: '/cert_supervised.png'
   },
   {
+    title: 'GitHub Foundations',
+    sub: 'DataCamp Course Completion Certificate',
+    mockup: '/cert_github.png'
+  },
+  {
     title: 'Network Support and Security',
     sub: 'Cisco Learning Career Certificate',
     mockup: '/cert_security.png'
