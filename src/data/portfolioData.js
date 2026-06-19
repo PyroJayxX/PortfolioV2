@@ -145,3 +145,9 @@ export const CERTIFICATES = [
     mockup: '/cert_googler.png'
   }
 ];
+
+export const MILESTONES = [
+    { title: 'AI Intern — Crawlers Consultancy, Inc., Crawlers Insurance Agency, Inc., Remote, Quezon City, Philippines', year: 'Jun 2026' },
+    { title: 'Research Intern — Multimedia and Computer Vision Laboratory, National Cheng Kung University, Tainan, Taiwan', year: 'Oct 2025' },
+    { title: 'IT Service Management Intern — Goldilocks Bakeshop, Inc., Greenfield Building, Mayflower St. Corner Williams, Mandaluyong', year: 'Jun 2025' }
+];

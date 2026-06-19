@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FOOTER_LINKS, PROJECTS, SKILL_GROUPS, CERTIFICATES } from '../../data/portfolioData';
+import { FOOTER_LINKS, PROJECTS, SKILL_GROUPS, CERTIFICATES, MILESTONES} from '../../data/portfolioData';
 import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import ChatWidget from './ChatWidget';
 import '../../styles/ProfessionalPortfolio.css';
@@ -97,11 +97,6 @@ const chipStyle = {
 export default function ProfessionalPortfolio() {
   const [selectedCert, setSelectedCert] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
-
-  const MILESTONES = [
-    { title: 'Research Intern — Multimedia and Computer Vision Laboratory, National Cheng Kung University, Tainan, Taiwan', year: 'Oct 2025' },
-    { title: 'IT Service Management Intern — Goldilocks Bakeshop, Inc., Greenfield Building, Mayflower St. Corner Williams, Mandaluyong', year: 'Jun 2025' }
-  ];
 
   return (
     <main style={{ minHeight: '100vh', width: '100%', color: '#f4f6fb', background: 'radial-gradient(circle at top left, rgba(133, 147, 255, 0.08), transparent 35%), radial-gradient(circle at top right, rgba(110,228,185,0.08), transparent 35%), linear-gradient(180deg, #0b0d12 0%, #06070a 100%)', overflowX: 'hidden' }}>
@@ -206,7 +201,7 @@ export default function ProfessionalPortfolio() {
               <div style={{ position: 'relative', paddingLeft: 8 }}>
                 <div style={{ position: 'absolute', left: 13, top: 12, bottom: 12, width: 2, background: 'rgba(255,255,255,0.08)' }} />
                 
-                <div style={{ display: 'grid', gap: 24 }}>
+                <div style={{ display: 'grid', gap: 12 }}>
                   {MILESTONES.map((m, idx) => {
                     const [role, company] = m.title.includes(' — ') ? m.title.split(' — ') : [m.title, ''];
                     
@@ -216,10 +211,10 @@ export default function ProfessionalPortfolio() {
                         <div style={{ width: 12, height: 12, borderRadius: '50%', background: idx === 0 ? '#ffffff' : '#0b0d12', border: idx === 0 ? 'none' : '2px solid rgba(255,255,255,0.15)', boxShadow: idx === 0 ? '0 0 8px rgba(255,255,255,0.5)' : 'none', marginTop: 4, position: 'relative', zIndex: 2, flexShrink: 0 }} />
                         
                         {/* Main Content Area */}
-                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                           
                           {/* Top Row: Role and Date */}
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap' }}>
                             <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#ffffff', lineHeight: 1.3 }}>{role}</div>
                             <div style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.06)', padding: '4px 12px', borderRadius: 999, color: 'rgba(255,255,255,0.8)', fontSize: '0.75rem', fontWeight: 600, whiteSpace: 'nowrap', marginTop: -2 }}>
                               {m.year}
